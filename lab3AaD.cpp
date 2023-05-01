@@ -1,18 +1,18 @@
 ﻿#include <iostream>
-
+#include"complexInt.h"
 
 enum Color { RED, BLACK };
 
 class Node {
 public:
-    float data;
+    Complex data;
     Color color;
     Node* parent;
     Node* left;
     Node* right;
     int size;
 
-    Node(float d, Color c, Node* p, Node* l, Node* r, int s)
+    Node(Complex d, Color c, Node* p, Node* l, Node* r, int s)
         : data(d), color(c), parent(p), left(l), right(r), size(s) {};
 };
 
@@ -20,7 +20,7 @@ class OrderStatisticTree {
 public:
     OrderStatisticTree() : root(nullptr) {};
 
-    void Insert(float data) {
+    void Insert(Complex data) {
         Node* x = root;
         Node* y = nullptr;
         while (x != nullptr) {
@@ -43,7 +43,7 @@ public:
         FixTreeAfterInsert(z);
     }
 
-    float OrderStatistic(int k) {
+    Complex OrderStatistic(int k) {
         Node* x = root;
         while (x != nullptr) {
             int r = x->left ? x->left->size : 0;
@@ -142,15 +142,16 @@ private:
 };
 
     int main() {
+        setlocale(LC_ALL, "ukrainian");
         OrderStatisticTree tree;
-        tree.Insert(120);
-        tree.Insert(54);
-        tree.Insert(45);
-        tree.Insert(320);
+        tree.Insert(Complex(120,15));
+        tree.Insert(Complex(35,12));
+        tree.Insert(Complex(1,5));
+        tree.Insert(Complex(62,34));
 
-        std::cout << tree.OrderStatistic(1) << std::endl;
-        std::cout << tree.OrderStatistic(2) << std::endl;
-        std::cout << tree.OrderStatistic(3) << std::endl;
-        std::cout << tree.OrderStatistic(4) << std::endl;
+        std::cout << "Елемент з 1 статистикою " << tree.OrderStatistic(1).getString() << std::endl;
+        std::cout << "Елемент з 2 статистикою " << tree.OrderStatistic(2).getString() << std::endl;
+        std::cout << "Елемент з 3 статистикою " << tree.OrderStatistic(3).getString() << std::endl;
+        std::cout << "Елемент з 4 статистикою " << tree.OrderStatistic(4).getString() << std::endl;
        
     }
